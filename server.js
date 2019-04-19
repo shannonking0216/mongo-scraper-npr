@@ -50,7 +50,7 @@ app.get("/scrape", (req, res) => {
           .then(dbArticle => console.log(dbArticle))
           .catch(err => console.log(err));
       });
-      res.send("Scraped data");
+      res.redirect("/");
     });
 });
 
