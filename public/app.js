@@ -36,7 +36,7 @@ $(document).ready(function () {
 
     $.ajax({
       method: "POST",
-      url: "/comemnt/" + thisId,
+      url: "/articles/" + thisId,
       data: {
         title: $("#titleinput").val(),
         body: $("#bodyinput").val()
