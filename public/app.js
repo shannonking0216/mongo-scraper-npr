@@ -8,36 +8,31 @@ $.getJSON("/articles", function (data) {
 });
 
 $(document).on("click", "p", function () {
-    console.log("foobar");
     // WE DONT WANT THE COMMENTS TO EMPTY EACH TIME...
     $("#comment").empty();
     var thisId = $(this).attr("data-id");
-    console.log(thisId);
+
     $.ajax({
         method: "GET",
         url: "/articles/" +  thisId
     })
-    // /articles/856827365498237547586
-    // /articles/:id
-
         .then(function (data) {
             console.log(data);
             $("#comment").append("<h2>" + data.title + "</h2>");
             $("#comment").append("<input id='titleinput' name='title' >");
             $("#comment").append("<textarea id='bodyinput' name='body'></textarea>");
-            $("#comment").append("<button data-id='" + data._id + "' id='savecomment'>Save Note</button>");
+            $("#comment").append("<button data-id='" + data._id + "' id='savecomment'>Save comment</button>");
 
-            if (data.note) {
-                $("#titleinput").val(data.note.title);
-                $("#bodyinput").val(data.note.body);
+            if (data.comment) {
+                $("#titleinput").val(data.comment.title);
+                $("#bodyinput").val(data.comment.body);
             }
         });
 });
 
 $(document).on("click", "#savecomment", function() {
-  
-    var thisId = $(this).attr("data-id");
-    console.log(thisId); 
+    var thisId = $(this).attr("data-id"); 
+
     $.ajax({
       method: "POST",
       url: "/articles/" + thisId,
