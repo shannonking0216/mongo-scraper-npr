@@ -36,7 +36,7 @@ app.get("/scrape", (req, res) => {
     .get("https://www.npr.org/sections/art-design/")
     .then(response => {
       const $ = cheerio.load(response.data);
-      $("articles").each(function (i, element) {
+      $("article").each(function (i, element) {
         let title = $(element).find("h2").find("a").text();
         let link = $(element).find("h2").find("a").attr("href");
         let summary = $(element).find("p").text();
@@ -81,7 +81,7 @@ app.get("/articles/:id", function(req, res) {
 app.post("/articles/:id", function(req, res) {
   // Create a new Comment and pass the req.body to the entry
   db.Comment.create(req.body)
-    
+
     .then(function(dbComment) {
       // If a Comment was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Comment
       // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
